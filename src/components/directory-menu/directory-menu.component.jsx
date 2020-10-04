@@ -22,14 +22,4 @@ class DirectoryMenu extends React.Component {
     }
 }
 
-
-
-// const DirectoryMenu = (props) => {
-//     return(
-//         <div className='directory-menu'>
-//             {<MenuItem title={'Shoes'} />}
-//         </div>
-//     )
-// }
-
 export default DirectoryMenu;
