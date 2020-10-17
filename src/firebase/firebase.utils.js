@@ -36,4 +36,30 @@ export const signInWithGoogle = () => (fireAuth.signInWithPopup(googleProvider))
 * fbProvider.addScope('repo');;
 * export const signInWithGithub = () => (fireAuth.signInWithPopup(fbProvider));
 */
+
+export const createUserProfile = async (userAuth, otherData) => {
+    if (!userAuth) return;
+
+    const userRef = fireStore.doc(`users/${userAuth.uid}`);
+
+    const snapshot = await userRef.get();
+
+    if (!snapshot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+        try{
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...otherData
+            })
+        } catch(e){
+            console.log('error creating user', e.message);
+        }
+    }
+
+    return userRef;
+}
+
 export default firebase;

@@ -8,7 +8,7 @@ import ShopPage from './pages/shop-page/shop-page.component'
 import Header from './components/header/header.component';
 import SigninPage from './pages/signin-page/signin-page.component';
 
-import { fireAuth } from './firebase/firebase.utils'
+import { fireAuth, createUserProfile } from './firebase/firebase.utils'
 
 class App extends React.Component {
   constructor() {
@@ -19,17 +19,27 @@ class App extends React.Component {
     }
 
   }
-  
+
   authSubscription = null
 
   componentDidMount() {
-    this.authSubscription = fireAuth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
-      console.log(user)
+    this.authSubscription = fireAuth.onAuthStateChanged(async userAuth => {
+
+      if (userAuth) {
+        const userRef = await createUserProfile(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: snapShot.id,
+            ...snapShot.data()
+          })
+        });
+      }
+      this.setState({currentUser: null});
     })
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.authSubscription();
   }
 
