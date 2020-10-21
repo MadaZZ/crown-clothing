@@ -19,9 +19,28 @@ class Signup extends React.Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        this.setState({ email: '', password: '' });
+        const { displayName, email, password, confirmPassword } = this.state;
+
+        if (password !== confirmPassword) {
+            alert('Please enter matching passwords');
+            return;
+        }
+
+        try {
+            const { user } = await fireAuth.createUserWithEmailAndPassword(email, password);
+            await createUserProfile(user, { displayName });
+            this.setState({
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            })
+        } catch (e) {
+            console.log('Error: createUserWithEmailAndPassword', e.message);
+            alert('Error: createUserWithEmailAndPassword', e.message);
+        }
     }
 
     handleChange = (event) => {
@@ -63,7 +82,7 @@ class Signup extends React.Component {
 
                     <FormInput
                         type='password'
-                        name='confirm password'
+                        name='confirmPassword'
                         value={confirmPassword}
                         onChange={this.handleChange}
                         label='Confirm Password'
