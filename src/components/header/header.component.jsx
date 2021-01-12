@@ -9,7 +9,7 @@ import { fireAuth } from '../../firebase/firebase.utils'
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, cartHidden }) => {
     return (
         <div className='header'>
             <Link className='logo-container' to='/'>
@@ -30,13 +30,16 @@ const Header = ({ currentUser }) => {
                 }
                 <CartIcon/>
             </div>
-            <CartDropdown/>
+            {
+              cartHidden ? null : <CartDropdown />
+            }
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    cartHidden: state.cart.hidden
 })
 
 
