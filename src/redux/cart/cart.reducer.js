@@ -1,4 +1,4 @@
-import { cartTypes } from './cart.types';
+import CartTypes  from './cart.types';
 
 const INITIAL_STATE = {
     hidden: true,
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 const cartReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case cartTypes.TOGGLE_CART_HIDDEN:
+        case CartTypes.TOGGLE_CART_HIDDEN:
         return {
             ...state,
             hidden: !state.hidden

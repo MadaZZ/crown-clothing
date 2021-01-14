@@ -1,5 +1,5 @@
-import { cartTypes } from './cart.types';
+import  CartTypes  from './cart.types';
 
 export const toggleCartHidden = () => ({
-    type: cartTypes.TOGGLE_CART_HIDDEN,
+    type: CartTypes.TOGGLE_CART_HIDDEN,
 })
