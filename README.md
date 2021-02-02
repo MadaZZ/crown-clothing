@@ -1,6 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Crown Clothing
+This is an e-commerce app built using react.
 
-## Available Scripts
+Building blocks:
+- React
+- Firebase (Auth and storage)
+- SASS (Styling)
+- Redux
+- Stripe API (Payments)
+- More to come... (Still under construction)
+
+### Have a look at the [LIVE APP](https://crwn-clothing-fe.herokuapp.com/);
+
+## Available Scripts 
 
 In the project directory, you can run:
 
