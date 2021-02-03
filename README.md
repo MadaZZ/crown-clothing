@@ -5,6 +5,7 @@ Building blocks:
 - React
 - Firebase (Auth and storage)
 - SASS (Styling)
+- Styled components (JS Styling in modules)
 - Redux
 - Stripe API (Payments)
 - More to come... (Still under construction)
