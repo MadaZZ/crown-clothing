@@ -47,19 +47,31 @@ export const createUserProfile = async (userAuth, otherData) => {
     if (!snapshot.exists) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
-        try{
+        try {
             await userRef.set({
                 displayName,
                 email,
                 createdAt,
                 ...otherData
             })
-        } catch(e){
+        } catch (e) {
             console.log('error creating user', e.message);
         }
     }
 
     return userRef;
+}
+
+export const addCollectionAndDocuments = (collectionKey, objectsToAdd) => {
+    const collectionRef = fireStore.collection(collectionKey);
+
+    const batch = fireStore.batch();
+    objectsToAdd.forEach(obj => {
+        let newRefDoc = collectionRef.doc();
+        batch.set(newRefDoc, obj);
+    });
+
+    return batch.commit()
 }
 
 export default firebase;
